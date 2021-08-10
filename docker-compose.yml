@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  web:
+    container_name: django-app
+    build: .
+    command: python3 /app/manage.py runserver 0.0.0.0:8000
+    working_dir: /app
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./app:/app:delegated
+    depends_on:
+      - db
+    logging:
+      driver: 'json-file' # defaults if not specified
+      options:
+        max-size: '10m'
+        max-file: '3'
+  db:
+    image: mysql:8.0.16
+    restart: always
+    environment:
+      MYSQL_DATABASE: django_docker
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./mysql:/var/lib/mysql:delegated
+    ports:
+      - '33306:3306'
+    logging:
+      driver: 'json-file' # defaults if not specified
+      options:
+        max-size: '10m'
+        max-file: '3'
