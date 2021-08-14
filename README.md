@@ -1,6 +1,6 @@
 ## Environment
-Python version: 3.9.6
-Package manager: pip & requirements.txt
+- Python version: 3.9.6
+- Package manager: pip & requirements.txt
 
 ## How to use
 
