@@ -36,5 +36,5 @@ docker exec -it django-app python manage.py startapp app-name
 
 ### Login container
 ```
-docker exec-it django-app bash
+docker exec -it django-app bash
 ```
