@@ -1,8 +1,31 @@
 version: '3.8'
 services:
+  db:
+    container_name: db
+    build:
+      context: ./
+      dockerfile: ./db/Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_USER: 'django'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_DATABASE: 'sample'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql:delegated
+    ports:
+      - '3306:3306'
+    logging:
+      driver: 'json-file' # defaults if not specified
+      options:
+        max-size: '10m'
+        max-file: '3'
   web:
     container_name: django-app
-    build: .
+    build:
+      context: ./
+      dockerfile: ./django/Dockerfile
     command: python3 /app/manage.py runserver 0.0.0.0:8000
     working_dir: /app
     ports:
@@ -11,23 +34,6 @@ services:
       - ./app:/app:delegated
     depends_on:
       - db
-    logging:
-      driver: 'json-file' # defaults if not specified
-      options:
-        max-size: '10m'
-        max-file: '3'
-  db:
-    image: mysql:8.0.16
-    restart: always
-    environment:
-      MYSQL_DATABASE: django_docker
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    volumes:
-      - ./mysql:/var/lib/mysql:delegated
-    ports:
-      - '33306:3306'
     logging:
       driver: 'json-file' # defaults if not specified
       options:

@@ -7,7 +7,6 @@ RUN apt-get update -qq && \
                        default-mysql-client \
                        gcc\
                        libmariadb-dev
-
 RUN mkdir /app
 
 WORKDIR /app
