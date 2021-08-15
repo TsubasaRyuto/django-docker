@@ -4,6 +4,13 @@
 
 ## How to use
 
+### Set `src/requirements.txt` file
+src/requirements.txtに
+```
+Django>=3.2.6
+```
+と記述する。（各環境毎にrequirements.txtファイルがある場合は別django/Dockerfileファイルを必要がある）
+
 ### Clone application repository
 ```
 $ cd app/
