@@ -26,12 +26,12 @@ services:
     build:
       context: ./
       dockerfile: ./django/Dockerfile
-    command: python3 /app/manage.py runserver 0.0.0.0:8000
-    working_dir: /app
+    command: python3 /src/manage.py runserver 0.0.0.0:8000
+    working_dir: /src
     ports:
       - '8000:8000'
     volumes:
-      - ./app:/app:delegated
+      - ./src:/src:delegated
     depends_on:
       - db
     logging:

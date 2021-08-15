@@ -1,5 +1,5 @@
 .DS_Store
-app/*
+src/*
 db/mysql_data/*
 !.gitkeep
 !db/mysql_data/.gitkeep

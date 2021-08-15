@@ -7,12 +7,12 @@ RUN apt-get update -qq && \
                        default-mysql-client \
                        gcc\
                        libmariadb-dev
-RUN mkdir /app
+RUN mkdir /src
 
-WORKDIR /app
+WORKDIR /src
 
-ADD ./app/requirements.txt /app/
+ADD ./src/requirements.txt /src/
 RUN pip install --upgrade pip
-RUN pip install -r /app/requirements.txt
+RUN pip install -r /src/requirements.txt
 
 EXPOSE 8000
